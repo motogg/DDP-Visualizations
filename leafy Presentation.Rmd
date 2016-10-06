@@ -1,0 +1,57 @@
+---
+title: "Cool Spots in Ibadan, Nigeria"
+author: "Motogg"
+date: "October 6, 2016"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = "")
+```
+
+## Cool Places in Ibadan
+```{r leafletMap, echo=F}
+library(leaflet)
+locIcons = iconList(dominosIcon = makeIcon(iconUrl = "http://www.duskyillusions.com/wp-content/uploads/2015/02/Dominos_Logo.png",
+          iconWidth = 31*2*215/230, iconHeight = 31*1.5,
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+,
+dominosIcon = makeIcon(iconUrl = "http://www.duskyillusions.com/wp-content/uploads/2015/02/Dominos_Logo.png",
+          iconWidth = 31*2*215/230, iconHeight = 31*1.5,
+          iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+,
+venturaIcon = makeIcon(iconUrl = "http://etc.usf.edu/presentations/extras/letters/varsity_letters/03/34/v-400.png",
+      iconWidth = 31*215/230, iconHeight = 31,
+      iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+, 
+agodiIcon = makeIcon(iconUrl =                            "http://etc.usf.edu/presentations/extras/letters/varsity_letters/09/13/a-400.png",
+      iconWidth = 31*215/230, iconHeight = 31,
+      iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+,
+heritageIcon = makeIcon(iconUrl = 
+"http://etc.usf.edu/presentations/extras/letters/varsity_letters/01/20/h-400.png",
+      iconWidth = 31*215/230, iconHeight = 31,
+      iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+,
+palmsIcon = makeIcon(iconUrl =                              "http://etc.usf.edu/presentations/extras/letters/varsity_letters/08/28/p-400.png",
+      iconWidth = 31*215/230, iconHeight = 31,
+      iconAnchorX = 31*215/230/2, iconAnchorY = 16)
+)
+
+sites_of_loc = c(  "<a href='http://www.dominos.ng/'>Domino's Pizza, Bodija, Ibadan</a>",
+                   "<a href='http://www.dominos.ng/'>Domino's Pizza, Ring Road, Ibadan</a>",
+                   "<a href='http://theventuramall.com/'>Ventura Mall, Samonda, Ibadan</a>",
+                   "<a href='http://agodigardens.com/'>Agodi Gardens, Parliament Road, Ibadan</a>",
+                   "<a href='https://www.google.com/search?client=safari&rls=en&q=heritage+mall+ibadan&ie=UTF-8&oe=UTF-8/'>Heritage Mall, Dugbe, Ibadan</a>",
+                   "<a href='http://thepalmshoppingmall.com/ibadan/'>The Palms, Ring Road, Ibadan</a>")
+
+
+df = data.frame(lat = c(7.417127, 7.368029, 7.427005, 7.406946, 7.386598, 7.364158), 
+                lng = c(3.903273, 3.860300, 3.901823, 3.899265, 3.879874, 3.865799))
+
+df %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(icon = locIcons , popup = sites_of_loc)
+        
+        
