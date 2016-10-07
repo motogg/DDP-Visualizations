@@ -1,15 +1,11 @@
----
-title: "Cool Spots in Ibadan, Nigeria"
-author: "Motogg"
-date: "October 6, 2016"
-output: ioslides_presentation
----
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, comment = "")
 ```
 
 ## Cool Places in Ibadan
+#### *October 7, 2016*
 ```{r leafletMap, echo=F}
 library(leaflet)
 locIcons = iconList(dominosIcon = makeIcon(iconUrl = "http://www.duskyillusions.com/wp-content/uploads/2015/02/Dominos_Logo.png",
