@@ -1,0 +1,30 @@
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(plotly)
+library(dplyr)
+```
+
+##Crude Oil Prices Comparison
+####*October 16, 2016*
+```{r plot, echo=F, fig.align='center', fig.width=8, fig.height=6}
+library(plotly)
+library(dplyr)
+
+Crude = read.csv("Crude.csv")
+Crude = Crude %>% transform(Date = as.Date(Date, "%Y-%m-%d"))
+
+crude_plot = Crude %>% 
+        group_by(Crude.Type) %>% 
+        plot_ly(x= ~Date, y = ~Price)
+
+crude_plot %>% 
+        add_fun(function(plot){
+                plot %>% filter(Crude.Type == "OPEC") %>%
+                add_lines(name = "OPEC")})%>%
+        
+        add_fun(function(plot){
+                plot %>% filter(Crude.Type == "NON_OPEC") %>%
+                        add_lines(name = "NON OPEC")}) %>%
+        rangeslider()
+        
