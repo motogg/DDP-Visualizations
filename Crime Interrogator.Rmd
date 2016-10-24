@@ -6,7 +6,11 @@ output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, comment = "")
+library(raster)
+library(rgdal)
+library(maptools)
+library(dplyr)
 ```
 
 ## Introduction
@@ -24,7 +28,42 @@ The Crime Interrogator is what you need.
 The Crime Interrogator downloads a crimes data set from a github repository, which was curated from [Unifor Crime Reporting Statistics](http://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm). It also downloads a GIS data from [Eric Celeste's GIS data site](http://eric.clst.org/wupl/Stuff/gz_2010_us_040_00_500k.kml).     
 
 
-The shiny application combines the two data sets, and employs the **leaflet** R package in plotting the map data. The application also provides a slider input to enable year selection.
+The shiny application combines the two data sets, and employs the **leaflet** R package in plotting the map data. The application also provides a slider input to enable year selection.  
+A row of the data is shown below.
+
+```{r showdata, echo=F, warning=F}
+library(raster)
+library(rgdal)
+library(maptools)
+library(dplyr)
+
+crime_data = "/Users/Gbolly/Documents/MOOC materials/Data Science Specialization/Developing Data Products/Self-sourced Datasets/crime.csv"
+map_data = "/Users/Gbolly/Documents/MOOC materials/Data Science Specialization/Developing Data Products/Self-sourced Datasets/gz_2010_us_040_00_500k.kml"
+
+## get data
+if(!file.exists(crime_data) & file.exists(map_data)){
+crime = read.csv("https://github.com/motogg/DDP-Visualizations/Data/crime.csv")
+usa = readOGR("http://eric.clst.org/wupl/Stuff/gz_2010_us_040_00_500k.kml",
+              layer = "gz_2010_us_040_00_500k", encoding = "utf-8")
+
+}else{
+        crime = read.csv(crime_data)
+        usa = readOGR(map_data, layer = "gz_2010_us_040_00_500k", encoding = "utf-8", verbose = F )
+}
+
+## get a year out (1980) and add crime rate per thousand
+crime = crime %>%
+        filter(Year == 1980)%>%
+        mutate(CrimeRate = Property.crime.total  * 1000 / Population )
+        
+## merge data
+usa = merge(usa, crime, by.x = "Name", by.y = "State", all.x = F, all.y = F)
+
+
+## show first 5 elements of merged data
+head(usa,1)
+```
+
 
 ## Advantages of Using the Crime Interrogator
 - It summarizes the Data in a Lucid and accessible manner
