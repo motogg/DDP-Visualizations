@@ -1,0 +1,37 @@
+---
+title: "Crime Interrogator Pitch"
+author: "Gbolahan"
+date: "October 24, 2016"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+If you are a researcher or you are just curious about crimes statistics, an interface that can enable you compare crimes across geographical locations, and across time would interest you, as such an application can quickly provide you with valuable crime insights you may not find some other way, or only with expensive dedicated systems. 
+
+
+The Crime Interrogator is what you need.
+
+
+## The Crime Interrogator
+![Crime Interrogator Interface](~/desktop/Crime_Interrogator.png)
+
+
+## How It Works
+The Crime Interrogator downloads a crimes data set from a github repository, which was curated from [Unifor Crime Reporting Statistics](http://www.ucrdatatool.gov/Search/Crime/State/RunCrimeStatebyState.cfm). It also downloads a GIS data from [Eric Celeste's GIS data site](http://eric.clst.org/wupl/Stuff/gz_2010_us_040_00_500k.kml).     
+
+
+The shiny application combines the two data sets, and employs the **leaflet** R package in plotting the map data. The application also provides a slider input to enable year selection.
+
+## Advantages of Using the Crime Interrogator
+- It summarizes the Data in a Lucid and accessible manner
+
+- It reduces researching burden by obviating the use of table data from spread sheets, and allowing the 
+data to be presented in a map.
+
+- The color gradient that characterises the *crime rate per thousand* makes it easy to be able to visually compare crime rates across states
+
+- The ability to be able to switch across years gives another dimension to the investigation of crime data.

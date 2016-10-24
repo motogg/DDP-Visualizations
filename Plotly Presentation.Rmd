@@ -1,3 +1,8 @@
+---
+title: Crude Oil Prices Comparison
+output: ioslides_presentation
+date: October 16, 2016
+---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -6,8 +11,8 @@ library(dplyr)
 ```
 
 ##Crude Oil Prices Comparison
-####*October 16, 2016*
-```{r plot, echo=F, fig.align='center', fig.width=8, fig.height=6}
+
+```{r plot, echo=F, fig.align='center'}
 library(plotly)
 library(dplyr)
 
