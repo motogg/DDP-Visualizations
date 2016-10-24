@@ -58,8 +58,9 @@ crime = crime %>%
         
 ## merge data
 usa = merge(usa, crime, by.x = "Name", by.y = "State", all.x = F, all.y = F)
+```
 
-
+```{r show, echo=T}
 ## show first 5 elements of merged data
 head(usa,1)
 ```
