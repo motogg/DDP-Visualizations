@@ -8,6 +8,7 @@ date: October 16, 2016
 knitr::opts_chunk$set(echo = FALSE)
 library(plotly)
 library(dplyr)
+
 ```
 
 ##Crude Oil Prices Comparison
@@ -15,6 +16,7 @@ library(dplyr)
 ```{r plot, echo=F, fig.align='center'}
 library(plotly)
 library(dplyr)
+library(stats)
 
 Crude = read.csv("Crude.csv")
 Crude = Crude %>% transform(Date = as.Date(Date, "%Y-%m-%d"))
